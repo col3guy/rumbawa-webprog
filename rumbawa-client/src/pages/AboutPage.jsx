@@ -1,10 +1,10 @@
 import Button from "../components/Button";
-import TASKMANAGER from "../../public/authenticate.jpg"
+import TASKMANAGER from "../../public/task-manager.png"
 import ORDERING from "../../public/ordering.png"
 import AUTHENTICATION from "../../public/authenticate.jpg";
 import CLOTHES from "../../public/clothing.png";
 
-  
+
 const AboutPage = () => {
   return (
     <div className="flex w-full flex-col gap-6">
@@ -57,10 +57,10 @@ const AboutPage = () => {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { label: "Projects", value: "05" },
-            { label: "Skills", value: "16" },
-            { label: "Tools", value: "09" },
-            { label: "Portfolio", value: "03" },
+            { label: "Projects", value: "05+" },
+            { label: "Skills", value: "04+" },
+            { label: "Tools", value: "10+" },
+            { label: "Portfolio", value: "02+" },
           ].map((item) => (
             <div
               key={item.label}
@@ -93,8 +93,7 @@ const AboutPage = () => {
               <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
                 <h3 className="text-lg font-semibold text-zinc-900">About Me</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
-                  I am a motivated student web developer eager to learn and build clean, accessible web applications. I focus on frontend development using modern technologies like React and Tailwind CSS.
-                </p>
+I am continuously improving my skills by building real-world projects and exploring new technologies.               </p>
               </article>
 
               {/* Experience Block */}
@@ -109,37 +108,42 @@ const AboutPage = () => {
               <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
                 <h3 className="text-lg font-semibold text-zinc-900">Skills & Tools</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
-                  HTML, CSS, JavaScript, React, Tailwind CSS | Tools: VS Code, Git, Chrome DevTools. Passionate about creating clean and user-friendly interfaces.
-                </p>
+                  <p className="mt-3 text-sm leading-6 text-zinc-600">
+                    <span className="font-semibold">Technologies:</span> HTML, CSS, JavaScript, React, Tailwind CSS
+                    <br />
+                    <span className="font-semibold">Tools:</span> VS Code, Git, Chrome DevTools
+                    <br />
+                    Passionate about creating clean, responsive, and user-friendly interfaces.
+                  </p>               </p>
               </article>
             </div>
           </div>
 
-         {/* VISUAL GRID */}
+          {/* VISUAL GRID */}
           <div className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">
               My Work Preview
             </p>
- 
+
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
                 <img src={TASKMANAGER} className="h-full w-full object-cover" />
               </div>
- 
+
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
                 <img src={ORDERING} className="h-full w-full object-cover" />
               </div>
- 
+
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
                 <img src={AUTHENTICATION} className="h-full w-full object-cover" />
               </div>
- 
+
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
-                <img src={TASKMANAGER} className="h-full w-full object-cover" />
+                <img src={CLOTHES} className="h-full w-full object-cover" />
               </div>
             </div>
- 
-            <Button className="mt-5">View Section</Button>
+
+            <Button className="mt-5">View Projects</Button>
           </div>
 
         </div>
