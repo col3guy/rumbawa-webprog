@@ -26,10 +26,10 @@ const articles = [
     title: "Online Clothing Merch",
     image: "/clothing.png",
     content: [
-      "An online shopping platform offering official merchandise such as clothing and accessories.",
-      "Includes clean and organized product layout for easy browsing.",
-      "Built to provide a smooth and responsive shopping experience.",
-      "Showcases modern UI design and user-focused functionality."
+      "An online shopping platform offering official merchandise.",
+      "Includes clothing and accessories for users to browse.",
+      "Designed with a clean and organized product layout.",
+      "Provides a simple and smooth shopping experience."
     ]
   },
   {
@@ -37,21 +37,21 @@ const articles = [
     title: "Food Ordering UI",
     image: "/ordering.png",
     content: [
-      "A user-friendly interface for browsing food items and placing orders online.",
-      "Responsive and intuitive design for seamless navigation.",
-      "Enhances user experience with smooth interactions.",
-      "Built with modern frontend tools for scalability."
+      "A user-friendly interface for browsing food items.",
+      "Allows users to view and select items easily.",
+      "Focused on responsive and intuitive design.",
+      "Improves user experience in online food ordering."
     ]
   },
   {
     name: "restaurant-reservation",
-    title: "Restaurant Booking Reservation",
+    title: "Restaurant Reservation System",
     image: "/restaurant-reservation.webp",
     content: [
-      "Web app for users to reserve tables online and check availability.",
-      "Includes admin management features for restaurant staff.",
-      "Automatic email notifications for confirmed bookings.",
-      "Designed with a clean interface for easy usability."
+      "Web app for booking tables in restaurants.",
+      "Shows available slots and allows instant confirmation.",
+      "Includes email notifications for reservations.",
+      "Designed with clean interface for both customers and staff."
     ]
   },
   {
@@ -60,9 +60,9 @@ const articles = [
     image: "/travel-blog.webp",
     content: [
       "A full-featured blog platform that allows users to create, edit, and manage posts.",
-      "Supports a clean and responsive UI for reading and writing content.",
-      "Includes image and multimedia embedding in articles.",
-      "Built with React and Tailwind CSS for smooth user experience."
+      "Clean and responsive UI for seamless reading experience.",
+      "Supports multimedia content including images and videos.",
+      "Built with React and Tailwind CSS for modern frontend."
     ]
   },
   {
@@ -70,10 +70,10 @@ const articles = [
     title: "Weather App",
     image: "/weather-app.png",
     content: [
-      "Provides current weather updates, forecasts, and location-based data.",
-      "Integrates public APIs for accurate real-time information.",
+      "A simple weather application providing current updates and forecasts.",
+      "Uses API integration for accurate location-based weather data.",
       "Displays temperature, humidity, wind speed, and weather icons.",
-      "Responsive design optimized for desktop and mobile devices."
+      "Responsive design works on mobile and desktop devices."
     ]
   },
   {
@@ -81,10 +81,10 @@ const articles = [
     title: "E-Learning Platform",
     image: "/E-learning.png",
     content: [
-      "Interactive platform delivering online courses and lessons.",
-      "Tracks user progress and achievements across modules.",
-      "Engages learners with multimedia content and quizzes.",
-      "Designed with intuitive UI for a seamless learning experience."
+      "Interactive platform to deliver courses and track progress.",
+      "Supports multimedia content and quizzes for learners.",
+      "Provides a dashboard for instructors and students.",
+      "Responsive and accessible design for all devices."
     ]
   },
   {
@@ -92,10 +92,10 @@ const articles = [
     title: "Fitness Tracker",
     image: "/fitness-tracker.avif",
     content: [
-      "Web and mobile application to track workouts and health metrics.",
-      "Logs daily activity, exercises, and progress over time.",
-      "Interactive charts display improvements in health and fitness.",
-      "Responsive layout suitable for all devices."
+      "Web and mobile app to track workouts and monitor health metrics.",
+      "Logs exercises, calories, and progress over time.",
+      "Includes interactive charts for insights and improvements.",
+      "Designed for a healthier lifestyle and easy tracking."
     ]
   },
   {
@@ -103,10 +103,10 @@ const articles = [
     title: "Image Gallery",
     image: "/image-gallery.avif",
     content: [
-      "A responsive gallery allowing users to upload, browse, and search images.",
-      "Provides smooth navigation and filtering for easy image discovery.",
-      "Supports multiple image formats with quick loading times.",
-      "Designed with clean UI to enhance visual appeal."
+      "Responsive image gallery application for browsing and uploading images.",
+      "Supports search, filters, and smooth navigation.",
+      "Designed with modern UI and responsive layout.",
+      "Optimized for performance and user experience."
     ]
   }
 ];

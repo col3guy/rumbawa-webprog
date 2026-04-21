@@ -1,9 +1,4 @@
-import Button from "../components/Button";
-import TASKMANAGER from "../../public/task-manager.png"
-import ORDERING from "../../public/ordering.png"
-import AUTHENTICATION from "../../public/authenticate.jpg";
-import CLOTHES from "../../public/clothing.png";
-
+import Button from "../../components/Button";
 
 const AboutPage = () => {
   return (
@@ -89,14 +84,13 @@ const AboutPage = () => {
             </h2>
 
             <div className="mt-6 space-y-4">
-              {/* Intro Block */}
               <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
                 <h3 className="text-lg font-semibold text-zinc-900">About Me</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
-I am continuously improving my skills by building real-world projects and exploring new technologies.               </p>
+                  I am continuously improving my skills by building real-world projects and exploring new technologies.
+                </p>
               </article>
 
-              {/* Experience Block */}
               <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
                 <h3 className="text-lg font-semibold text-zinc-900">Experience</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -104,17 +98,15 @@ I am continuously improving my skills by building real-world projects and explor
                 </p>
               </article>
 
-              {/* Details Block */}
               <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
                 <h3 className="text-lg font-semibold text-zinc-900">Skills & Tools</h3>
                 <p className="mt-3 text-sm leading-6 text-zinc-600">
-                  <p className="mt-3 text-sm leading-6 text-zinc-600">
-                    <span className="font-semibold">Technologies:</span> HTML, CSS, JavaScript, React, Tailwind CSS
-                    <br />
-                    <span className="font-semibold">Tools:</span> VS Code, Git, Chrome DevTools
-                    <br />
-                    Passionate about creating clean, responsive, and user-friendly interfaces.
-                  </p>               </p>
+                  <span className="font-semibold">Technologies:</span> HTML, CSS, JavaScript, React, Tailwind CSS
+                  <br />
+                  <span className="font-semibold">Tools:</span> VS Code, Git, Chrome DevTools
+                  <br />
+                  Passionate about creating clean, responsive, and user-friendly interfaces.
+                </p>
               </article>
             </div>
           </div>
@@ -127,19 +119,19 @@ I am continuously improving my skills by building real-world projects and explor
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
-                <img src={TASKMANAGER} className="h-full w-full object-cover" />
+                <img src="/task-manager.png" className="h-full w-full object-cover" alt="Task Manager"/>
               </div>
 
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
-                <img src={ORDERING} className="h-full w-full object-cover" />
+                <img src="/ordering.png" className="h-full w-full object-cover" alt="Ordering App"/>
               </div>
 
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
-                <img src={AUTHENTICATION} className="h-full w-full object-cover" />
+                <img src="/authenticate.jpg" className="h-full w-full object-cover" alt="Authentication"/>
               </div>
 
               <div className="aspect-square overflow-hidden rounded-[1.25rem]">
-                <img src={CLOTHES} className="h-full w-full object-cover" />
+                <img src="/clothing.png" className="h-full w-full object-cover" alt="Clothing"/>
               </div>
             </div>
 
