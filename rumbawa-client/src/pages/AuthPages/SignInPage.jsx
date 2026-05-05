@@ -4,10 +4,13 @@ import Button from '../../components/Button';
 const inputClasses =
   'w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-green-500 focus:ring-2 focus:ring-green-200';
 
+const actionButtonClassName =
+  "w-full rounded-2xl py-3 text-xs tracking-widest font-semibold";
+
 const SignInPage = () => {
   return (
     <div className="w-full max-w-md rounded-3xl bg-white/80 backdrop-blur-md p-8 shadow-xl">
-      
+
       {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-zinc-900">Sign in</h1>
@@ -28,7 +31,7 @@ const SignInPage = () => {
 
       {/* Form */}
       <form className="mt-6 space-y-4">
-        
+
         {/* Email */}
         <div>
           <label className="text-sm font-medium text-zinc-700">Email</label>
@@ -64,9 +67,11 @@ const SignInPage = () => {
         {/* Submit */}
         <Button
           type="submit"
-          className="w-full rounded-xl bg-green-500 py-3 text-white hover:bg-green-600"
+          variant="primary"
+          className={actionButtonClassName}
+          to="/dashboard"
         >
-          Log in
+          LOG IN
         </Button>
       </form>
 

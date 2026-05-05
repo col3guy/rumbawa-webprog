@@ -30,7 +30,7 @@ const NavBar = () => {
     };
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-zinc-900 bg-zinc-100/95 backdrop-blur">
+       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#3A2316]/95 backdrop-blur text-white">
             <div className="relative mx-auto flex max-w-6xl items-center px-4 py-4 sm:px-6 lg:px-8">
                 <NavLink to="/" className="flex items-center gap-3">
                     <img src="/logo.png" alt="Logo" className="h-11 w-auto" />

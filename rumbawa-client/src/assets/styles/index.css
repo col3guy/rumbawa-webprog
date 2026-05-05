@@ -1,11 +1,22 @@
 @import "tailwindcss";
 
 @layer base {
-  body {
-    @apply bg-zinc-100 text-zinc-900 antialiased;
+  html, body {
+    font-family: "Inter", sans-serif;
+
+    /* ✅ safe Tailwind background */
+    @apply bg-zinc-100;
+
+    /* ✅ safe base text color */
+    @apply text-zinc-800;
   }
- 
+
   #root {
     @apply min-h-screen;
+  }
+
+  ::selection {
+    background-color: #6F4518;
+    color: white;
   }
 }
