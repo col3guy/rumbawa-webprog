@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { styled, useTheme, alpha } from "@mui/material/styles";
+import {
+  Outlet,
+  Link,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
+
+import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -11,43 +18,38 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import AssessmentIcon from "@mui/icons-material/Assessment";
-import Button from "@mui/material/Button";
+import ArticleIcon from "@mui/icons-material/Article";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
 
-const dashboardNavItems = [
-  {
-    label: "Dashboard",
-    title: "Dashboard",
-    to: "/dashboard",
-    icon: DashboardIcon,
-  },
-  {
-    label: "Reports",
-    title: "Reports",
-    to: "/dashboard/reports",
-    icon: AssessmentIcon,
-  },
-  {
-    label: "Users",
-    title: "Users",
-    to: "/dashboard/users",
-    icon: PeopleIcon,
-  },
-];
+/* =======================
+   USER HELPERS
+======================= */
+const getUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem("user"));
+  } catch {
+    return null;
+  }
+};
 
+const canAccessUsers = (role) => ["admin"].includes(role);
+
+/* =======================
+   STYLES
+======================= */
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -97,101 +99,97 @@ const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": {
-      ...openedMixin(theme),
-      fontFamily: "Inter, sans-serif", // ✅ FONT
-    },
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": {
-      ...closedMixin(theme),
-      fontFamily: "Inter, sans-serif", // ✅ FONT
-    },
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  fontFamily: "Inter, sans-serif", // ✅ FONT
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
-const getPageTitle = (pathname) =>
-  dashboardNavItems.find((t) => t.to === pathname)?.title ?? "Welcome";
-
-const DashLayout = () => {
+/* =======================
+   COMPONENT
+======================= */
+export default function DashLayout() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const pageTitle = getPageTitle(location.pathname);
   const navigate = useNavigate();
 
+  const user = getUser();
+
+  /* 🔐 STRONG AUTH GUARD */
+  if (!user || !user.role) {
+    return <Navigate to="/auth/signin" replace />;
+  }
+
+  /* Allow only admin and editor to access dashboard. */
+  if (!["admin", "editor"].includes(user.role)) {
+    localStorage.removeItem("user");
+    return <Navigate to="/auth/signin" replace />;
+  }
+
+  /* =======================
+     NAV ITEMS
+  ======================= */
+  const dashboardNavItems = [
+    {
+      label: "Dashboard",
+      to: "/dashboard",
+      icon: DashboardIcon,
+    },
+    {
+      label: "Reports",
+      to: "/dashboard/reports",
+      icon: AssessmentIcon,
+    },
+
+    ...(canAccessUsers(user.role)
+      ? [
+          {
+            label: "Users",
+            to: "/dashboard/users",
+            icon: PeopleIcon,
+          },
+        ]
+      : []),
+
+    {
+      label: "Articles",
+      to: "/dashboard/articles",
+      icon: ArticleIcon,
+    },
+  ];
+
+  const getPageTitle = () => {
+    const item = dashboardNavItems.find((t) =>
+      location.pathname.startsWith(t.to)
+    );
+    return item?.label || "Dashboard";
+  };
+
   return (
-    <Box sx={{ display: "flex", fontFamily: "Inter, sans-serif" }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
       {/* APP BAR */}
-      <AppBar
-        position="fixed"
-        open={open}
-        sx={{
-          backgroundColor: "#3A2316",
-          fontFamily: "Inter, sans-serif",
-        }}
-      >
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "#3A2316" }}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            onClick={() => setOpen(!open)}
-            sx={{ marginRight: 5 }}
-          >
+          <IconButton color="inherit" onClick={() => setOpen(!open)}>
             {open ? <MenuOpenIcon /> : <MenuIcon />}
           </IconButton>
 
-          <Typography sx={{ flexGrow: 1, fontFamily: "Inter, sans-serif" }}>
-            {pageTitle}
+          <Typography sx={{ flexGrow: 1 }}>
+            {getPageTitle()}
           </Typography>
 
           <Button
             color="inherit"
             variant="outlined"
-            onClick={() => navigate("/")}
-            sx={{ fontFamily: "Inter, sans-serif" }}
+            onClick={() => {
+              localStorage.removeItem("user");
+              navigate("/auth/signin");
+            }}
           >
             Logout
           </Button>
@@ -218,14 +216,7 @@ const DashLayout = () => {
               <ListItemButton
                 component={Link}
                 to={to}
-                selected={location.pathname === to}
-                sx={{
-                  fontFamily: "Inter, sans-serif",
-                  "&.Mui-selected": {
-                    backgroundColor: "#3A2316",
-                    color: "#fff",
-                  },
-                }}
+                selected={location.pathname.startsWith(to)}
               >
                 <ListItemIcon sx={{ color: "inherit" }}>
                   <Icon />
@@ -233,10 +224,7 @@ const DashLayout = () => {
 
                 <ListItemText
                   primary={label}
-                  sx={{
-                    opacity: open ? 1 : 0,
-                    fontFamily: "Inter, sans-serif",
-                  }}
+                  sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
             </ListItem>
@@ -244,7 +232,7 @@ const DashLayout = () => {
         </List>
       </Drawer>
 
-      {/* MAIN CONTENT */}
+      {/* MAIN */}
       <Box
         component="main"
         sx={{
@@ -253,13 +241,10 @@ const DashLayout = () => {
           mt: 8,
           backgroundColor: "#f5f7fb",
           minHeight: "100vh",
-          fontFamily: "Inter, sans-serif",
         }}
       >
         <Outlet />
       </Box>
     </Box>
   );
-};
-
-export default DashLayout;
+}

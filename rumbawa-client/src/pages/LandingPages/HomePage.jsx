@@ -1,7 +1,12 @@
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
+import projects from '../../data/projects';
 
 const HomePage = () => {
+    const publishedProjects = projects
+        .filter((project) => String(project.status).toLowerCase() === 'published')
+        .slice(0, 3);
+
     return (
         <div className="flex w-full flex-col gap-6">
             {/* Introduction Section */}
@@ -88,68 +93,31 @@ const HomePage = () => {
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-3">
-                    <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <img
-                                src="/task-manager.png"
-                                alt="Task Management Website"
-                                className="h-full w-full object-cover rounded-[1.25rem]"
-                            />
-                        </div>
-                        <h3 className="mt-4 text-lg font-semibold text-zinc-900">
-                            Task Management Website
-                        </h3>
-                        <p className="mt-3 text-sm leading-6 text-zinc-600">
-                            A simple productivity web app that allows users to create, update, and delete tasks. Designed with a clean interface to help users stay organized and manage daily activities efficiently.
-                        </p>
-                        <Link to="/articles/task-management-website">
-                            <Button className="mt-4" variant="primary">
-                                View More
-                            </Button>
-                        </Link>
-                    </article>
-
-                    <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <img
-                                src="/authentication.webp"
-                                alt="Authentication System"
-                                className="h-full w-full object-cover rounded-[1.25rem]"
-                            />
-                        </div>
-                        <h3 className="mt-4 text-lg font-semibold text-zinc-900">
-                            Authentication System
-                        </h3>
-                        <p className="mt-3 text-sm leading-6 text-zinc-600">
-                            A basic authentication system that allows users to register, log in, and manage sessions. Focused on form validation and secure user input handling.
-                        </p>
-                        <Link to="/articles/authentication-system">
-                            <Button className="mt-4" variant="primary">
-                                View More
-                            </Button>
-                        </Link>
-                    </article>
-
-                    <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <img
-                                src="/ordering.png"
-                                alt="Food Ordering Website UI"
-                                className="h-full w-full object-cover rounded-[1.25rem]"
-                            />
-                        </div>
-                        <h3 className="mt-4 text-lg font-semibold text-zinc-900">
-                            Food Ordering Website UI
-                        </h3>
-                        <p className="mt-3 text-sm leading-6 text-zinc-600">
-                            A user-friendly interface for browsing food items and placing orders online. Focused on layout design, navigation, and responsive user experience.
-                        </p>
-                        <Link to="/articles/food-ordering-ui">
-                            <Button className="mt-4" variant="primary">
-                                View More
-                            </Button>
-                        </Link>
-                    </article>
+                    {publishedProjects.map((project) => (
+                        <article
+                            key={project.id}
+                            className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4"
+                        >
+                            <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="h-full w-full object-cover rounded-[1.25rem]"
+                                />
+                            </div>
+                            <h3 className="mt-4 text-lg font-semibold text-zinc-900">
+                                {project.title}
+                            </h3>
+                            <p className="mt-3 text-sm leading-6 text-zinc-600">
+                                {project.description}
+                            </p>
+                            <Link to={`/articles/${project.name}`}>
+                                <Button className="mt-4" variant="primary">
+                                    View More
+                                </Button>
+                            </Link>
+                        </article>
+                    ))}
                 </div>
             </section>
 

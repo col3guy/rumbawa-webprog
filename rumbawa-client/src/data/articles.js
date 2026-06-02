@@ -1,0 +1,125 @@
+const articles = [
+  {
+    id: 1,
+    slug: "task-management-website",
+    title: "Task Management Website",
+    image: "/task-manager.png",
+    preview: "A productivity app to manage tasks efficiently.",
+    paragraphs: [
+      "This project helps users manage daily tasks.",
+      "It includes create, update, and delete functionality.",
+      "Built using React and modern UI practices.",
+    ],
+    status: "published",
+  },
+  {
+    id: 2,
+    slug: "authentication-system",
+    title: "Authentication System",
+    image: "/authenticate.jpg",
+    preview: "Secure login and authentication system.",
+    paragraphs: [
+      "This system handles login and registration.",
+      "It uses token-based authentication.",
+    ],
+    status: "draft",
+  },
+  {
+    id: 3,
+    slug: "online-clothing-merch",
+    title: "Online Clothing Merch",
+    image: "/clothing.png",
+    preview: "Official clothing merchandise platform.",
+    paragraphs: [
+      "An online shopping platform for clothing merch.",
+      "Users can browse and purchase products.",
+    ],
+    status: "published",
+  },
+  {
+    id: 4,
+    slug: "food-ordering-ui",
+    title: "Food Ordering UI",
+    image: "/ordering.png",
+    preview: "A user-friendly food ordering interface.",
+    paragraphs: [
+      "Browse menus with easy meal selection.",
+      "Place orders quickly using a clean interface.",
+    ],
+    status: "draft",
+  },
+  {
+    id: 5,
+    slug: "restaurant-reservation",
+    title: "Restaurant Booking Reservation",
+    image: "/restaurant-reservation.webp",
+    preview: "A restaurant reservation app for online bookings.",
+    paragraphs: [
+      "Reserve tables and review availability online.",
+      "Designed for both guests and restaurant staff.",
+    ],
+    status: "published",
+  },
+  {
+    id: 6,
+    slug: "blog-platform",
+    title: "Travel Blog",
+    image: "/travel-blog.webp",
+    preview: "A travel blog platform with engaging content.",
+    paragraphs: [
+      "Publish travel stories and tips with ease.",
+      "Share visuals and narratives for readers.",
+    ],
+    status: "draft",
+  },
+  {
+    id: 7,
+    slug: "weather-app",
+    title: "Weather App",
+    image: "/weather-app.png",
+    preview: "A weather app with forecast updates.",
+    paragraphs: [
+      "Show current weather and upcoming conditions.",
+      "Built for fast local forecast lookups.",
+    ],
+    status: "published",
+  },
+  {
+    id: 8,
+    slug: "e-learning-platform",
+    title: "E-Learning Platform",
+    image: "/E-learning.png",
+    preview: "An interactive e-learning platform.",
+    paragraphs: [
+      "Browse courses and track learning progress.",
+      "Designed for lessons, quizzes, and onboarding.",
+    ],
+    status: "draft",
+  },
+  {
+    id: 9,
+    slug: "fitness-tracker",
+    title: "Fitness Tracker",
+    image: "/fitness-tracker.avif",
+    preview: "A fitness tracker for workouts and health.",
+    paragraphs: [
+      "Log exercise sessions and monitor progress.",
+      "Track health metrics in a simple dashboard.",
+    ],
+    status: "published",
+  },
+  {
+    id: 10,
+    slug: "image-gallery",
+    title: "Image Gallery",
+    image: "/image-gallery.avif",
+    preview: "A responsive image gallery app.",
+    paragraphs: [
+      "Upload, browse, and filter image collections.",
+      "Enjoy a polished gallery experience.",
+    ],
+    status: "published",
+  },
+];
+
+export default articles;

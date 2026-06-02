@@ -15,6 +15,9 @@ import DashboardPage from "./pages/DashboardPages/DashboardPage";
 import ReportsPage from "./pages/DashboardPages/ReportsPage";
 import UsersPage from "./pages/DashboardPages/UsersPage";
 
+import DashArticleListPage from "./pages/DashboardPages/DashArticleListPage";
+import DashArticlePage from "./pages/DashboardPages/DashArticlePage";
+
 import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
@@ -26,7 +29,9 @@ const router = createBrowserRouter([
       { index: true, element: <Homepage /> },
       { path: "about", element: <AboutPage /> },
       { path: "articles", element: <ArticleListPage /> },
-      { path: "articles/:name", element: <ArticlePage /> },
+
+      // ✅ FIXED: use ID (IMPORTANT)
+      { path: "articles/:id", element: <ArticlePage /> },
     ],
   },
 
@@ -40,7 +45,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  // 📊 DASHBOARD
+  // 📊 DASHBOARD (SEPARATE SYSTEM)
   {
     path: "dashboard",
     element: <DashLayout />,
@@ -48,10 +53,13 @@ const router = createBrowserRouter([
       { index: true, element: <DashboardPage /> },
       { path: "reports", element: <ReportsPage /> },
       { path: "users", element: <UsersPage /> },
+
+      { path: "articles", element: <DashArticleListPage /> },
+      { path: "articles/:id", element: <DashArticlePage /> },
     ],
   },
 
-  // ❌ GLOBAL 404 (MUST BE LAST)
+  // ❌ 404
   {
     path: "*",
     element: <NotFoundPage />,

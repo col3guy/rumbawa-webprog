@@ -1,87 +1,120 @@
-import { Link } from 'react-router-dom';
-import Button from '../../components/Button';
-
-const inputClasses =
-  'w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-green-500 focus:ring-2 focus:ring-green-200';
-
-const actionButtonClassName =
-  "w-full rounded-2xl py-3 text-xs tracking-widest font-semibold";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import constants from "../../constants.js";
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${constants.HOST}/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.toLowerCase().trim(),
+          password: password.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Login failed");
+        setLoading(false);
+        return;
+      }
+
+      if (data.role === "viewer") {
+        alert("Viewer accounts cannot sign in. Please use the public pages.");
+        setLoading(false);
+        return;
+      }
+
+      // 💾 store session
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: data.id,
+          email: data.email,
+          role: data.role,
+        })
+      );
+
+      // 🚀 redirect
+      navigate("/dashboard");
+
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Server not running or API error");
+    }
+
+    setLoading(false);
+  };
+
   return (
-    <div className="w-full max-w-md rounded-3xl bg-white/80 backdrop-blur-md p-8 shadow-xl">
+    <div className="min-h-screen flex items-center justify-center bg-zinc-100 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
 
-      {/* Header */}
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-zinc-900">Sign in</h1>
-        <p className="mt-2 text-sm text-zinc-500">
-          Please login to continue to your journey.
-        </p>
-      </div>
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold">Welcome Back</h1>
+          <p className="text-sm text-zinc-500">Sign in to continue</p>
+        </div>
 
-      {/* Social Buttons */}
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        <button className="flex items-center justify-center gap-2 rounded-xl border border-zinc-300 bg-white py-2 text-sm hover:bg-zinc-50">
-          Continue with Google
-        </button>
-        <button className="flex items-center justify-center gap-2 rounded-xl border border-zinc-300 bg-white py-2 text-sm hover:bg-zinc-50">
-          Continue with Apple
-        </button>
-      </div>
+        <form onSubmit={handleLogin} className="space-y-4">
 
-      {/* Form */}
-      <form className="mt-6 space-y-4">
-
-        {/* Email */}
-        <div>
-          <label className="text-sm font-medium text-zinc-700">Email</label>
           <input
             type="email"
-            placeholder="email"
-            className={inputClasses + ' mt-2'}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 border rounded-xl"
           />
-        </div>
 
-        {/* Password */}
-        <div>
-          <label className="text-sm font-medium text-zinc-700">Password</label>
           <input
             type="password"
-            placeholder="password"
-            className={inputClasses + ' mt-2'}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-3 border rounded-xl"
           />
-        </div>
 
-        {/* Options */}
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center gap-2 text-zinc-600">
-            <input type="checkbox" className="accent-green-500" />
-            Remember me
-          </label>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-black text-white py-3 rounded-xl disabled:opacity-50"
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
 
-          <button className="text-zinc-500 hover:text-zinc-900">
-            Forgot Password?
+        {/* SIGN UP */}
+        <div className="text-center mt-6">
+          <p className="text-sm text-zinc-500">
+            Don’t have an account?
+          </p>
+
+          <button
+            onClick={() => navigate("/auth/signup")}
+            className="text-sm font-semibold hover:underline"
+          >
+            Create account
           </button>
         </div>
 
-        {/* Submit */}
-        <Button
-          type="submit"
-          variant="primary"
-          className={actionButtonClassName}
-          to="/dashboard"
-        >
-          LOG IN
-        </Button>
-      </form>
-
-      {/* Footer */}
-      <p className="mt-6 text-center text-sm text-zinc-600">
-        Need an account?{' '}
-        <Link to="/auth/signup" className="font-semibold text-green-600 hover:underline">
-          Create one
-        </Link>
-      </p>
+      </div>
     </div>
   );
 };
